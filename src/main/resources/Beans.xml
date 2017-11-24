@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding =  "UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- Jedynie singleton może wywołać destroy method!!! -->
+    <!-- Fasolka jest abstrakcją. Nie utworzysz obiektu tej fasolki-->
+    <bean
+            id="helloWorld"
+            class="com.tutorial.HelloWorld"
+            name="World"
+            lazy-init="false"
+            abstract="true"
+            destroy-method="destroy"
+    >
+        <property name="message1" value="Hello World!"/>
+        <property name="message2" value="Zaczyna się..."/>
+    </bean>
+
+    <!--Dziedziczenie w springu. A że mi się nie chciało pisać to także w plikach java jest :D-->
+    <bean
+            id="helloIndia"
+            class="com.tutorial.HelloIndia"
+            name="India"
+            lazy-init="false"
+            
+            destroy-method="destroy"
+            parent="helloWorld"
+    >
+        <property name="message2" value="Hello India!"/>
+        <property name="message3" value="Zaczyna się..."/>
+    </bean>
+
+
+    <!-- Tutaj będzie coś z dependency injection. -->
+    <bean
+            id="textEditor"
+    >
+
+    </bean>
+
+    <bean
+            id="spellChecker"
+    >
+
+    </bean>
+    <!--Fasolka odpowiedzialna za akcje przed i po inicjalizacji-->
+    <bean class="com.tutorial.Init"/>
+</beans>
